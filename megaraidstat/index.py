@@ -13,6 +13,7 @@ import re
 import subprocess
 import sys
 from html.parser import HTMLParser
+from . import __version__
 
 
 storcli_path = None
@@ -987,6 +988,7 @@ def format_predictive_failure(prediction):
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
+    parser.add_argument('--version', help='Show version', action='store_true', default=False)
     parser.add_argument('--path', help='Specify storcli executable path.', default=None)
     parser.add_argument('--no-color', help='Do not use color.', action='store_true', default=False)
     parser.add_argument('--predict', help='Check if failure is predicted.', action='store_true', default=False)
@@ -1024,10 +1026,13 @@ def find_storcli_executable(user_executable):
     return None
 
 
-#if __name__ == '__main__':
 def main():
     args = parse_arguments()
     found = find_storcli_executable(args.path)
+
+    if args.version:
+        print(f'{__version__}')
+        quit()
 
     if found is None:
         print('Cannot find storcli executable in your PATH. Please install it.', file=sys.stderr)

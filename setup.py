@@ -23,7 +23,12 @@ setup(
     long_description_content_type='text/markdown',
     url='https://gitlab.com/daverona/python/megaraidstat',
     keywords='megaraid, storcli, python',
-    classifiers=[],
+    classifiers=[
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3 :: Only',
+        'Operating System :: OS Independent',
+    ],
     packages=['megaraidstat'],
     zip_safe=False,
 
