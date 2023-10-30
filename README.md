@@ -5,8 +5,8 @@ Inspect disks on MegaRAID controllers.
 ## Installation
 
 ```bash
-pip3 install git@gitlab.com:daverona/python/megaraidcli  # installation
-# pip3 remove megaraidstat  # uninstallation
+sudo pip3 install git+https://gitlab.com/daverona/python/megaraidstat  # installation
+# sudo pip3 remove megaraidstat  # uninstallation
 ```
 
 ## How to use
