@@ -29,7 +29,9 @@ setup(
 
     python_requires='>=3.6, <4',
     entry_points={
-        console_scripts=['megaraidstat=megaraidstat.index:main'],
+        'console_scripts': [
+            'megaraidstat=megaraidstat.index:main',
+        ],
     },
     setup_requires=[],
     install_requires=[],
