@@ -1024,7 +1024,8 @@ def find_storcli_executable(user_executable):
     return None
 
 
-if __name__ == '__main__':
+#if __name__ == '__main__':
+def main():
     args = parse_arguments()
     found = find_storcli_executable(args.path)
 
