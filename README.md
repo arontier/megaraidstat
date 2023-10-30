@@ -1,5 +1,7 @@
 # megaraidstat
 
+Inspect disks on MegaRAID controllers.
+
 ## Installation
 
 ```bash
@@ -7,31 +9,13 @@ pip3 install git@gitlab.com:daverona/python/megaraidcli  # installation
 # pip3 remove megaraidstat  # uninstallation
 ```
 
-## Use
-
-```bash
-sudo megaraidstat --help
-
-# usage: megaraidstat [-h] [--version] [--path PATH] [--no-color] [--predict] [--check] [--event] [--event-filters EVENT_FILTERS] [--event-type EVENT_TYPE]
-# 
-# options:
-#   -h, --help            show this help message and exit
-#   --version             Show version
-#   --path PATH           Specify storcli executable path.
-#   --no-color            Do not use color.
-#   --predict             Check if failure is predicted.
-#   --check               Check if configuration is sane.
-#   --event               Show event logs.
-#   --event-filters EVENT_FILTERS
-#                         Specify comma separated filters for event logs. Available filters are: info, warning, critical, fatal
-#   --event-type EVENT_TYPE
-#                         Specify a type of event logs. Available types are: includedeleted, sinceshutdown, sincereboot, latest=N, "ccincon vd=0,1,2..."
-```
+## How to use
 
 ```bash
 sudo megaraidstat
 # sudo megaraidstat --no-color  # monochrome version
 
+# The output should look like this:
 # CONTROLLERS
 # +-----+-----------------------------------------------------+-------+------+--------+-------+-------------------------+
 # | CID | Controller (serial, firmware)                       |   RAM |  Tpr | BBU    | Alarm | Clock (controller)      |
@@ -63,13 +47,7 @@ sudo megaraidstat
 # | VID    | SID         | Disk (serial)                      | Intf | Med |     Size | Status | Spun | DiskSpd | LinkSpd | Tpr | DID | #PFA | Topology           |
 # +--------+-------------+------------------------------------+------+-----+----------+--------+------+---------+---------+-----+-----+------+--------------------+
 # | /c0/v0 | /c0/e252/s0 | WDC WD80EAZZ-00BKLB0 (WD-XXXXXXXX) | SATA | HDD | 7.276 TB | Online | Up   | 6.0Gb/s | 6.0Gb/s | 33C |  18 |    0 | dg=0 array=0 row=0 |
-# | /c0/v0 | /c0/e252/s1 | WDC WD80EAZZ-00BKLB0 (WD-XXXXXXXX) | SATA | HDD | 7.276 TB | Online | Up   | 6.0Gb/s | 6.0Gb/s | 34C |  17 |    0 | dg=0 array=0 row=1 |
-# | /c0/v0 | /c0/e252/s2 | WDC WD80EAZZ-00BKLB0 (WD-XXXXXXXX) | SATA | HDD | 7.276 TB | Online | Up   | 6.0Gb/s | 6.0Gb/s | 34C |  15 |    0 | dg=0 array=0 row=2 |
-# | /c0/v0 | /c0/e252/s3 | WDC WD80EAZZ-00BKLB0 (WD-XXXXXXXX) | SATA | HDD | 7.276 TB | Online | Up   | 6.0Gb/s | 6.0Gb/s | 35C |  16 |    0 | dg=0 array=0 row=3 |
-# | /c0/v0 | /c0/e252/s4 | WDC WD80EAZZ-00BKLB0 (WD-XXXXXXXX) | SATA | HDD | 7.276 TB | Online | Up   | 6.0Gb/s | 6.0Gb/s | 33C |  14 |    0 | dg=0 array=0 row=4 |
-# | /c0/v0 | /c0/e252/s5 | WDC WD80EAZZ-00BKLB0 (WD-XXXXXXXX) | SATA | HDD | 7.276 TB | Online | Up   | 6.0Gb/s | 6.0Gb/s | 33C |  13 |    0 | dg=0 array=0 row=5 |
-# | /c0/v0 | /c0/e252/s6 | WDC WD80EAZZ-00BKLB0 (WD-XXXXXXXX) | SATA | HDD | 7.276 TB | Online | Up   | 6.0Gb/s | 6.0Gb/s | 34C |  12 |    0 | dg=0 array=0 row=6 |
-# | /c0/v0 | /c0/e252/s7 | WDC WD80EAZZ-00BKLB0 (WD-XXXXXXXX) | SATA | HDD | 7.276 TB | Online | Up   | 6.0Gb/s | 6.0Gb/s | 34C |  11 |    0 | dg=0 array=0 row=7 |
+# | ...... | ........... | .................................. | .... | ... | ........ | ...... | .... | ....... | ....... | ... | ... | .... | .................. |
 # +--------+-------------+------------------------------------+------+-----+----------+--------+------+---------+---------+-----+-----+------+--------------------+
 # PHYSICAL DISKS OUT OF VIRTUAL DISKS
 # +-----+---------------+------+-----+------+--------+------+---------+---------+-----+-----+------+-----+
@@ -82,10 +60,7 @@ sudo megaraidstat
 # | CID | SeqNum     |     Event time (system) | Severity | Description                          | Data | Event time (controller) |
 # +-----+------------+-------------------------+----------+--------------------------------------+------+-------------------------+
 # | /c0 | 0x0000675d | Sat 2023-10-28 15:40:43 | INFO     | Patrol Read complete                 |      | Sat 2023-10-28 06:40:40 |
-# | /c0 | 0x0000675c | Sat 2023-10-28 01:00:03 | INFO     | Patrol Read started                  |      | Fri 2023-10-27 16:00:00 |
-# | /c0 | 0x0000675b | Fri 2023-10-27 20:02:12 | INFO     | Consistency Check aborted on VD 00/0 | More | Fri 2023-10-27 11:02:09 |
-# | /c0 | 0x0000675a | Fri 2023-10-27 20:02:12 | INFO     | Consistency Check aborted on VD 00/0 | More | Fri 2023-10-27 11:02:09 |
-# | /c0 | 0x00006759 | Fri 2023-10-27 19:58:26 | INFO     | Consistency Check resumed on VD 00/0 | More | Fri 2023-10-27 10:58:23 |
+# | ... | .......... | ....................... | ........ | .................................... | .... | ....................... |
 # +-----+------------+-------------------------+----------+--------------------------------------+------+-------------------------+
 # # CRITICAL=error without data loss,FATAL=error with possible data loss,FAULT=catastropic hardware failure
 ```
@@ -93,10 +68,30 @@ sudo megaraidstat
 ```bash
 sudo megaraidstat --event
 # sudo megaraidstat --event --event-type="latest=10"  # the most recent ten log entries
+
+# The output should look like this:
+# EVENT LOGS: CONTROLLER 0
+# +-----+------------+-------------------------+----------+----------------------------------------------------------------------------------+------+-------------------------+
+# | CID | SeqNum     |     Event time (system) | Severity | Description                                                                      | Data | Event time (controller) |
+# +-----+------------+-------------------------+----------+----------------------------------------------------------------------------------+------+-------------------------+
+# | /c0 | 0x0000675d | Sat 2023-10-28 15:40:43 | INFO     | Patrol Read complete                                                             |      | Sat 2023-10-28 06:40:40 |
+# | ... | .......... | ....................... | ........ | ................................................................................ | .... | ....................... |
+# +-----+------------+-------------------------+----------+----------------------------------------------------------------------------------+------+-------------------------+
+# # CRITICAL=error without data loss,FATAL=error with possible data loss,FAULT=catastropic hardware failure
 ```
 
 ```bash
 sudo megaraidstat --check
+
+# The output should look like this:
+# [W001] BBU is either absent or good on /c0.
+# [W002] Alarm is either absent or on in /c0.
+# [W003] Auto rebuild option is on in /c0.
+# [W004] No two tasks are schueduled to run at the same time on /c0.
+# [W005] Consistency check is recommended not to run too often (less than 30 days) on /c0.
+# [W006] Patrol read is recommended not to run too often (less than a week) on /c0.
+# [I001] Multiple virtual disks are recommended to be named.
+# [I002] Write-back is recommended for write cache policy on /c0/v0 if connected to a failure-free power source.
 ```
 
 ## References
